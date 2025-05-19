@@ -6,6 +6,9 @@ WORKDIR /var/www/html
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
+# Change Apache to listen on port 8080
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/apache2/ports.conf
+
 # Install system dependencies
 RUN apt-get update -y && apt-get install -y \
     libicu-dev \
