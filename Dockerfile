@@ -45,4 +45,5 @@ COPY apache/laravel.conf /etc/apache2/sites-available/000-default.conf
 # Add entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+EXPOSE 8080
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
