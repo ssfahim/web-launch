@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+
+  laravel-web:
+    container_name: laravel-web
+    build: .
+    volumes:
+      - ./laravel-app:/var/www/html
+    ports:
+      - "9002:80"
+    depends_on:
+      - mysql_db
+    environment:
+      - APACHE_RUN_USER=www-data
+      - APACHE_RUN_GROUP=www-data
+    command: ["apache2-foreground"]
+
+  mysql_db:
+    image: mysql:8.0 # consider pinning to a version
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taravel_docker
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3308:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "9003:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql_db
+      - PMA_PORT=3306
+
+volumes:
+  db_data:
