@@ -8,13 +8,12 @@ services:
     volumes:
       - ./laravel-app:/var/www/html
     ports:
-      - "9002:8080"
+      - "8080:8080"
     depends_on:
       - mysql_db
     environment:
       - APACHE_RUN_USER=www-data
       - APACHE_RUN_GROUP=www-data
-    command: ["apache2-foreground"]
 
   mysql_db:
     image: mysql:8.0 # consider pinning to a version

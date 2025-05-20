@@ -29,6 +29,7 @@ destroy-rebuild:
 	docker exec -it laravel-web bash
 	composer create-project laravel/laravel .
 
+	composer install
 	php artisan config:clear
 	php artisan route:clear
 	php artisan view:clear
